@@ -143,3 +143,4 @@ cython_debug/
 # data
 .postgresql
 .redis
+app/storage.json
