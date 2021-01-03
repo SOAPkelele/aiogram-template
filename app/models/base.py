@@ -5,13 +5,15 @@ from typing import List
 import sqlalchemy as sa
 from gino import UninitializedError, Gino
 from sqlalchemy import Column, DateTime
-
+from sqlalchemy.sql import Select
 
 db = Gino()
 
 
 class BaseModel(db.Model):
     __abstract__ = True
+
+    query: Select
 
     def __str__(self):
         model = self.__class__.__name__

@@ -1,4 +1,4 @@
-from sqlalchemy.sql import Select, expression
+from sqlalchemy.sql import expression
 from sqlalchemy import Column, ForeignKey, Integer, Boolean
 
 from app.models.base import TimedBaseModel
@@ -9,7 +9,6 @@ class User(TimedBaseModel):
 
     id = Column(Integer, primary_key=True, index=True, unique=True)
     is_superuser = Column(Boolean, server_default=expression.false())
-    query: Select
 
 
 class UserRelatedMixin:
