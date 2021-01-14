@@ -16,7 +16,7 @@ class Broadcast:
         timeout: int = 0.02,
         logger=__name__,
         bot: Bot = None,
-    ):
+    ):  # TODO add inline markup here
         self.bot = bot if bot else Bot.get_current()
         if isinstance(users, list):
             self.users = users
@@ -56,7 +56,7 @@ class Broadcast:
             return True
         return False
 
-    async def start(self) -> int:
+    async def start(self) -> int:  # TODO disable_notification to this func
         for user_id in self.users:
             if await self.send_message(user_id):
                 self.count += 1
