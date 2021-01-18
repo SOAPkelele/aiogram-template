@@ -9,13 +9,14 @@ from aiogram.utils import exceptions
 
 class Broadcast:
     def __init__(
-        self,
-        users: typing.Union[typing.List[int], typing.List[str], int, str],
-        text: str,
-        disable_notification: bool = False,
-        timeout: float = 0.02,
-        logger=__name__,
-        bot: Bot = None,
+            self,
+            users: typing.Union[typing.List[int], typing.List[str], int, str],
+            text: str,
+            disable_notification: bool = False,
+            disable_web_page_preview: bool = True,
+            timeout: float = 0.02,
+            logger=__name__,
+            bot: Bot = None
     ):  # TODO add inline markup here
         self.bot = bot if bot else Bot.get_current()
         if isinstance(users, list):
@@ -24,6 +25,7 @@ class Broadcast:
             self.users = [users]
         self.text = text
         self.disable_notification = disable_notification
+        self.disable_web_page_preview = disable_web_page_preview
         self.count = 0
         self.timeout = timeout
 
@@ -35,7 +37,10 @@ class Broadcast:
     async def send_message(self, user_id: typing.Union[int, str]) -> bool:
         try:
             await self.bot.send_message(
-                user_id, self.text, disable_notification=self.disable_notification
+                chat_id=user_id,
+                text=self.text,
+                disable_notification=self.disable_notification,
+                disable_web_page_preview=self.disable_web_page_preview
             )
         except exceptions.BotBlocked:
             self.logger.debug(f"Target [ID:{user_id}]: blocked by user")
