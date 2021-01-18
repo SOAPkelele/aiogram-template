@@ -13,7 +13,7 @@ class Broadcast:
         users: typing.Union[typing.List[int], typing.List[str], int, str],
         text: str,
         disable_notification: bool = False,
-        timeout: int = 0.02,
+        timeout: float = 0.02,
         logger=__name__,
         bot: Bot = None,
     ):  # TODO add inline markup here
